@@ -1,0 +1,290 @@
+import React, { useState } from 'react';
+import { Card, CardContent } from '@/components/ui/card';
+import { Star, ThumbsUp, Smile, Book, PiggyBank, Trophy, Palette, Brain, Heart } from 'lucide-react';
+
+const FamilyAdventure = () => {
+  const [attitudes, setAttitudes] = useState({
+    evita: { midday: 0, endday: 0 },
+    mara: { midday: 0, endday: 0 },
+    adrian: { midday: 0, endday: 0 }
+  });
+  
+  const [feelings, setFeelings] = useState({
+    evita: '',
+    mara: '',
+    adrian: ''
+  });
+  
+  const [activities, setActivities] = useState({
+    rollercoaster: [],
+    favorite: '',
+    learned: ''
+  });
+
+  const goals = {
+    evita: [
+      { icon: <Book className="w-5 h-5" />, text: "Leer un libro nuevo cada mes" },
+      { icon: <PiggyBank className="w-5 h-5" />, text: "Ahorrar para comprar algo especial" },
+      { icon: <Trophy className="w-5 h-5" />, text: "Practicar deportes dos veces por semana" }
+    ],
+    mara: [
+      { icon: <Palette className="w-5 h-5" />, text: "Crear un proyecto artístico mensual" },
+      { icon: <Brain className="w-5 h-5" />, text: "Mejorar en matemáticas" },
+      { icon: <Heart className="w-5 h-5" />, text: "Ayudar en casa semanalmente" }
+    ],
+    adrian: [
+      { icon: <Book className="w-5 h-5" />, text: "Leer 15 minutos cada día" },
+      { icon: <Trophy className="w-5 h-5" />, text: "Aprender un deporte nuevo" },
+      { icon: <Smile className="w-5 h-5" />, text: "Hacer una buena acción diaria" }
+    ]
+  };
+
+  return (
+    <div className="max-w-4xl mx-auto p-6 space-y-8">
+      {/* Header */}
+      <div className="text-center bg-gradient-to-r from-blue-500 to-purple-500 text-white p-8 rounded-lg shadow-lg">
+        <h1 className="text-4xl font-bold mb-4">¡Bienvenidos a Busch Gardens Tampa Bay!</h1>
+        <h2 className="text-2xl">Familia González Hauser</h2>
+        <p className="mt-2">2 de Enero de 2025</p>
+      </div>
+
+      {/* Individual Welcome Cards */}
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        {['Evita', 'Mara', 'Adrian Joaquín'].map((name, index) => (
+          <Card key={name} className="bg-white shadow-lg">
+            <CardContent className="p-6 text-center">
+              <h3 className="text-xl font-bold mb-2">{name}</h3>
+              <p className="text-gray-600">
+                {index === 0 && '12 años - Nuestra bailarina estrella'}
+                {index === 1 && '10 años - La artista de la familia'}
+                {index === 2 && '8 años - Nuestro pequeño científico'}
+              </p>
+              <p className="mt-4">
+                {index === 0 && '¡Evita, tu energía contagiosa hará de este día una aventura inolvidable! ¿Lista para bailar por todo el parque? 💃'}
+                {index === 1 && '¡Mara, tus ojos artistas verán la magia en cada rincón! ¿Cuántos colores diferentes encontrarás hoy? 🎨'}
+                {index === 2 && '¡Adrian Joaquín, prepara tu laboratorio móvil! Hoy hay muchos experimentos divertidos por hacer 🔬'}
+              </p>
+            </CardContent>
+          </Card>
+        ))}
+      </div>
+
+      {/* Theme Park Goals */}
+      <Card className="bg-white">
+        <CardContent className="p-6">
+          <h2 className="text-2xl font-bold text-center mb-6">Metas Para Hoy en Busch Gardens</h2>
+          <div className="space-y-4">
+            {[
+              { icon: "📚", text: "Leer las descripciones de las atracciones" },
+              { icon: "💰", text: "Administrar sabiamente el dinero para gastos" },
+              { icon: "🎯", text: "Probar una atracción nueva" },
+              { icon: "🎨", text: "Encontrar 3 cosas para dibujar después" },
+              { icon: "🔢", text: "Contar los tiempos de espera" },
+              { icon: "❤️", text: "Agradecer a un trabajador del parque" }
+            ].map((goal, index) => (
+              <div key={index} className="flex items-center space-x-4 bg-gray-50 p-4 rounded-lg">
+                <input
+                  type="checkbox"
+                  className="form-checkbox h-5 w-5 text-blue-500"
+                />
+                <span className="text-xl mr-2">{goal.icon}</span>
+                <span className="flex-grow">{goal.text}</span>
+              </div>
+            ))}
+          </div>
+          <div className="text-right mt-4">
+            <p className="text-gray-600">Completado: 0/6</p>
+          </div>
+        </CardContent>
+      </Card>
+
+      {/* Yearly Goals Introduction */}
+      <div className="space-y-6">
+        <Card className="bg-white">
+          <CardContent className="p-6 text-center">
+            <h2 className="text-2xl font-bold mb-4">Practicando Establecer Objetivos</h2>
+            <p className="text-gray-600 mb-4">
+              Hoy vamos a empezar una práctica muy especial: aprender a establecer y cumplir objetivos. 
+              ¡Comenzaremos aquí mismo en Busch Gardens! Esta experiencia nos ayudará a entender 
+              cómo podemos planear y lograr metas más grandes durante todo el año.
+            </p>
+            <p className="text-gray-600">
+              Cuando logremos nuestras metas en el parque, estaremos practicando habilidades 
+              importantes como la planificación, la perseverancia y la responsabilidad.
+            </p>
+          </CardContent>
+        </Card>
+        
+        <h2 className="text-2xl font-bold text-center mb-6">Ideas de Objetivos para el Año</h2>
+        {Object.entries(goals).map(([child, childGoals]) => (
+          <Card key={child} className="bg-white">
+            <CardContent className="p-6">
+              <h3 className="text-xl font-bold mb-4 capitalize">{child}</h3>
+              <div className="space-y-4">
+                {childGoals.map((goal, index) => (
+                  <div key={index} className="flex items-center space-x-4">
+                    {goal.icon}
+                    <span>{goal.text}</span>
+                  </div>
+                ))}
+              </div>
+            </CardContent>
+          </Card>
+        ))}
+      </div>
+
+      {/* Attitude Tracker */}
+      <div className="space-y-6">
+        <h2 className="text-2xl font-bold text-center">Evaluación de Mamá y Papá</h2>
+        {Object.keys(attitudes).map((child) => (
+          <Card key={child} className="bg-white">
+            <CardContent className="p-6">
+              <h3 className="text-xl font-bold mb-4 capitalize">{child}</h3>
+              <div className="bg-blue-50 p-4 rounded-lg mb-4">
+                <p className="text-sm text-blue-800">
+                  {child === 'evita' && 'Evaluaremos tu liderazgo positivo y cómo ayudas a tus hermanos. ¡Tu energía es contagiosa!'}
+                  {child === 'mara' && 'Valoraremos tu creatividad y paciencia. ¡Tu tranquilidad hace la diferencia!'}
+                  {child === 'adrian' && 'Observaremos tu curiosidad y entusiasmo. ¡Tus preguntas nos hacen pensar!'}
+                </p>
+              </div>
+              <div className="space-y-6">
+                {['midday', 'endday'].map((time) => (
+                  <div key={time} className="space-y-4">
+                    <div className="border-l-4 border-blue-500 pl-4">
+                      <p className="font-medium text-lg">{time === 'midday' ? 'Mitad del día' : 'Final del día'}</p>
+                      <p className="text-sm text-gray-600 mt-1">Calificación de 1-10 en:</p>
+                      <ul className="list-disc ml-4 text-sm text-gray-600">
+                        <li>Actitud con la familia</li>
+                        <li>Control del temperamento</li>
+                        <li>Apoyo al grupo</li>
+                      </ul>
+                    </div>
+                    <div className="flex space-x-2">
+                      {[...Array(10)].map((_, i) => (
+                        <button
+                          key={i}
+                          className={`p-2 rounded-full ${
+                            attitudes[child][time] === i + 1
+                              ? 'bg-blue-500 text-white'
+                              : 'bg-gray-200'
+                          }`}
+                          onClick={() =>
+                            setAttitudes({
+                              ...attitudes,
+                              [child]: { ...attitudes[child], [time]: i + 1 }
+                            })
+                          }
+                        >
+                          {i + 1}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </CardContent>
+          </Card>
+        ))}
+      </div>
+
+      {/* Feelings Section */}
+      <div className="space-y-6">
+        <h2 className="text-2xl font-bold text-center">¿Cómo te sientes?</h2>
+        {Object.keys(feelings).map((child) => (
+          <Card key={child} className="bg-white">
+            <CardContent className="p-6">
+              <h3 className="text-xl font-bold mb-4 capitalize">{child}</h3>
+              <textarea
+                className="w-full p-4 border rounded-lg"
+                rows="3"
+                placeholder="Escribe cómo te sientes..."
+                value={feelings[child]}
+                onChange={(e) =>
+                  setFeelings({ ...feelings, [child]: e.target.value })
+                }
+              />
+            </CardContent>
+          </Card>
+        ))}
+      </div>
+
+      {/* Activities Checklist */}
+      <Card className="bg-white">
+        <CardContent className="p-6">
+          <h2 className="text-2xl font-bold text-center mb-6">¡Actividades del Día!</h2>
+          <div className="space-y-6">
+            <div>
+              <p className="font-bold mb-2">¿Quién se subió a las montañas rusas con Papá?</p>
+              {['Evita', 'Mara', 'Adrian Joaquín'].map((name) => (
+                <label key={name} className="flex items-center space-x-2 mb-2">
+                  <input
+                    type="checkbox"
+                    checked={activities.rollercoaster.includes(name)}
+                    onChange={(e) => {
+                      if (e.target.checked) {
+                        setActivities({
+                          ...activities,
+                          rollercoaster: [...activities.rollercoaster, name]
+                        });
+                      } else {
+                        setActivities({
+                          ...activities,
+                          rollercoaster: activities.rollercoaster.filter(
+                            (n) => n !== name
+                          )
+                        });
+                      }
+                    }}
+                  />
+                  <span>{name}</span>
+                </label>
+              ))}
+            </div>
+
+            <div>
+              <p className="font-bold mb-2">¿Qué fue lo que más les gustó?</p>
+              <textarea
+                className="w-full p-4 border rounded-lg"
+                rows="3"
+                value={activities.favorite}
+                onChange={(e) =>
+                  setActivities({ ...activities, favorite: e.target.value })
+                }
+              />
+            </div>
+
+            <div>
+              <p className="font-bold mb-2">¿Qué aprendieron hoy?</p>
+              <textarea
+                className="w-full p-4 border rounded-lg"
+                rows="3"
+                value={activities.learned}
+                onChange={(e) =>
+                  setActivities({ ...activities, learned: e.target.value })
+                }
+              />
+            </div>
+          </div>
+        </CardContent>
+      </Card>
+
+      {/* Closing Message */}
+      <div className="text-center bg-gradient-to-r from-purple-500 to-blue-500 text-white p-8 rounded-lg shadow-lg">
+        <h2 className="text-2xl font-bold mb-4">¡Gracias por compartir este día tan especial!</h2>
+        <p>Los momentos en familia son los más valiosos, y hoy fue un día lleno de aprendizaje.</p>
+        <div className="mt-4 space-y-2">
+          <p>Aprendimos a:</p>
+          <ul className="text-left max-w-md mx-auto">
+            <li>• Establecer y cumplir metas juntos</li>
+            <li>• Apoyarnos como familia</li>
+            <li>• Manejar nuestras emociones en momentos de emoción</li>
+            <li>• Ser responsables con nuestro tiempo y recursos</li>
+          </ul>
+        </div>
+        <p className="mt-4">¡Cada aventura es una oportunidad para crecer juntos!</p>
+      </div>
+    </div>
+  );
+};
+
+export default FamilyAdventure;
