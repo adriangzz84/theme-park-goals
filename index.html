@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        body { 
+            padding: 15px; 
+            font-family: system-ui; 
+            max-width: 600px; 
+            margin: auto; 
+        }
+        .goal {
+            padding: 20px;
+            margin: 10px 0;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            font-size: 18px;
+            background: white;
+        }
+        .done {
+            background: #e6ffe6;
+            border-color: #4CAF50;
+        }
+        .count {
+            text-align: center;
+            font-size: 20px;
+            margin: 20px 0;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <h1>🎢 Theme Park Goals</h1>
+    <div id="goals"></div>
+    <div class="count" id="count">Done: 0/6</div>
+
+    <script>
+        const goals = [
+            "📚 Read ride descriptions",
+            "💰 Budget spending money wisely",
+            "🎯 Try one new ride",
+            "🎨 Find 3 things to draw later",
+            "🔢 Count waiting times",
+            "❤️ Thank a park worker"
+        ];
+
+        const div = document.getElementById('goals');
+        goals.forEach(goal => {
+            const box = document.createElement('div');
+            box.className = 'goal';
+            box.textContent = goal;
+            box.onclick = () => {
+                box.classList.toggle('done');
+                updateCount();
+            }
+            div.appendChild(box);
+        });
+
+        function updateCount() {
+            const done = document.getElementsByClassName('done').length;
+            document.getElementById('count').textContent = `Done: ${done}/6`;
+        }
+    </script>
+</body>
+</html>
